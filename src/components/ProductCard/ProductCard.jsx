@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/actions/cartActions";
+import { addToCart, removeFromCart } from "../../store/actions/cartActions";
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -11,6 +11,10 @@ function ProductCard({ product }) {
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
+
+  const deleteItem = (product) => {
+    dispatch(removeFromCart(product));
+  }
 
   return (
     <div className="card col-12 col-md-3 mx-auto">
@@ -28,7 +32,8 @@ function ProductCard({ product }) {
         <Link to={`/products/${product.id}`} className="btn btn-primary me-2">
           Details
         </Link>
-        <button className="btn btn-dark">Delete</button>
+        <button className="btn btn-dark"
+        onClick={()=>deleteItem(product)}>Delete</button>
       </div>
     </div>
   );
